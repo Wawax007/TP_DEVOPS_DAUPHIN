@@ -1,6 +1,6 @@
 ---
-- set_fact:
-    salut_webapp_file: "/opt/devops/salut.py"
+#- set_fact:
+#   salut_webapp_file: "/opt/devops/salut.py"
 
 - name: Créer un fichier sudoers pour le groupe 'devops'
   template:

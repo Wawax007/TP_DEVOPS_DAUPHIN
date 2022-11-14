@@ -1,0 +1,5 @@
+- name: Installer ufw
+  apt:
+    name:
+      - ufw
+    update_cache: yes
