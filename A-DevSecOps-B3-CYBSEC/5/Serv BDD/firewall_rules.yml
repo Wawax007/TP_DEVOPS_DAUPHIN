@@ -1,0 +1,27 @@
+---
+
+- name: Active le niveau de journalisation
+  ufw:
+    logging: 'full'
+	
+- name : Autorise les connexions à la base de donnée depuis le serveur WEB
+  ufw:
+	rule: allow
+	port: 3306
+	proto: tcp
+	src: 10.0.0.1
+
+	
+- name : Autorise connexions SSH entrante 
+  ufw:
+	rule: allow
+	port: 22
+	proto: tcp
+	direction: incoming
+	
+	
+- name: Rejette (drop) tout le reste du traffic
+  ufw:
+    state: enabled
+    policy: deny
+    direction: incoming

@@ -1,0 +1,12 @@
+---
+- set_fact:
+    salut_webapp_file: "/opt/devops/salut.py"
+
+- name: Créer un fichier sudoers pour le groupe 'devops'
+  template:
+    src: "../ansible/templates/devops.j2"
+    dest: "/etc/sudoers.d/devops"
+    validate: 'visudo -cf %s'
+    owner: root
+    group: root
+    mode: 0440
