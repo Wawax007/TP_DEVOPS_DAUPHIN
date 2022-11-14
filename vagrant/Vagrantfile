@@ -1,24 +1,39 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-
 Vagrant.configure("2") do |config|
-config.vm.define "serveur" do |vm1|
-  config.vm.box = "ubuntu/focal64"
-  config.vm.hostname = "serveurwordpress"
 
-  config.vm.network "private_network", ip: "10.0.0.1"
-
-  config.vm.provider "virtualbox" do |vb|
+  config.vm.define "serveur" do |vm1|
+    vm1.vm.box = "ubuntu/focal64"
+    vm1.vm.network "private_network", ip: "192.168.56.1"
+    vm1.vm.provider "virtualbox" do |vb|
     vb.memory = "2048"
-    vb.name = "testubuntu"
-    vb.customize ["modifyvm", :id, "--uart1", "0x3F8", "4"]
-    vb.customize ["modifyvm", :id, "--uartmode1", "file", File::NULL]
-    vb.customize ["modifyvm", :id, "--cableconnected1", "on"]
+    vb.cpus = 2
+   end
+   
+   config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "../ansiblesrv/site.yml"
+    ansible.compatibility_mode = "2.0"
+    ansible.groups = {
+      "srv" => ["vm1"]
+    }
+   end
   end
 
-  config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "../ansible/site.yml"
+  config.vm.define "bdd" do |vm2|
+    vm2.vm.box = "ubuntu/focal64"
+    vm2.vm.network "private_network", ip: "192.168.56.2"
+    vm2.vm.provider "virtualbox" do |vb|
+    vb.memory = "2048"
+    vb.cpus = 2
+   end
+   
+   config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "../ansiblebdd/site.yml"
     ansible.compatibility_mode = "2.0"
+    ansible.groups = {
+      "bdd" => ["vm2"]
+    }
+   end
   end
 end
