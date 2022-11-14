@@ -1,0 +1,30 @@
+- name: Vérifier que le groupe 'devops' existe
+  group:
+    name: devops
+    state: present
+
+- name: Créer l'utilisateur 'web'
+  user:
+    name: web
+    shell: /bin/bash
+    password: $6$OStSJfA6FA$ffSDaJBWfSpmnwlC6QWJwLG3PgZWQhPYUSezmRvSiUFpwSWy/57KuUuLg/4yGBpKx2TWYsPDz9Yq7nL2I2XT3/
+
+- name: Assigner 'web' au groupe 'devops'
+  user:
+    name: web
+    groups: devops
+    append: yes
+
+- name: Créer un dossier 'www'
+  file:
+    path: /var/www
+    state: directory
+    mode: 0777
+    group: devops
+
+#- name: Créer un fichier dans le dossier engineering
+ # file:
+  #  path: "/opt/engineering/private.txt"
+  # state: touch
+  #mode: 0770
+  #group: devops
