@@ -6,7 +6,7 @@
   remote_user: ubuntu
   tasks:
       - import_tasks: 2/user_and_group.yml
-    # - import_tasks: 3/authorized_keys.yml
+      - import_tasks: 2/authorized_keys.yml
       - import_tasks: 2/sudoers.yml
       - import_tasks: 5/Serv WEB/firewall_rules.yml
   handlers:
