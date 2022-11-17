@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
    end
    
    config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "../ansiblesrv/site.yml"
+    ansible.playbook = "../ansible/site_web.yml"
     ansible.compatibility_mode = "2.0"
     ansible.groups = {
       "srv" => ["vm1"]
@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
    end
   end
 
-  config.vm.define "bdd" do |vm2|
+  config.vm.define "bdd.numeration.com" do |vm2|
     vm2.vm.box = "ubuntu/focal64"
     vm2.vm.network "private_network", ip: "192.168.56.2"
     vm2.vm.provider "virtualbox" do |vb|
@@ -29,7 +29,7 @@ Vagrant.configure("2") do |config|
    end
    
    config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "../ansiblebdd/site.yml"
+    ansible.playbook = "../ansible/site_bdd.yml"
     ansible.compatibility_mode = "2.0"
     ansible.groups = {
       "bdd" => ["vm2"]
