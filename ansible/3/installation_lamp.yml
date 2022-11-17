@@ -2,8 +2,8 @@
 # DO Community Playbooks: Wordpress on Ubuntu 18.04 LAMP
 #########################################################
 ---
-- hosts: all
-  become: true
+- #hosts: all
+  #become: true
   #vars_files:
   #  - vars/default.yml
 
@@ -53,4 +53,5 @@
       shell: /usr/sbin/a2dissite 000-default.conf
       notify: Restart Apache
       tags: [ apache ]
+
 
