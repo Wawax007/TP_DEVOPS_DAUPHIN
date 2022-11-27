@@ -2,12 +2,12 @@
 # DO Community Playbooks: Wordpress on Ubuntu 18.04 LAMP
 #########################################################
 ---
-- hosts: all
-  become: true
+#hosts: all
+  #become: true
   #vars_files:
   #  - vars/default.yml
 
-  tasks:
+  #tasks:
     - name: Install prerequisites
       apt: name=aptitude update_cache=yes state=latest force_apt_get=yes
       tags: [ system ]
